@@ -1,0 +1,10 @@
+server:
+  port: ${PORT:2333}
+
+lavalink:
+  server:
+    password: ${LAVALINK_SERVER_PASSWORD:1234}
+
+plugins:
+  - dependency: "dev.lavalink.youtube:youtube-plugin:1.11.2"
+    repository: "https://maven.lavalink.dev/releases"
