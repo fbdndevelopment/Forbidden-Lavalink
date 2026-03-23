@@ -1,15 +1,13 @@
-FROM eclipse-temurin:18-jre-jammy
+FROM eclipse-temurin:17-jdk
 
-# Run as non-root user
-RUN groupadd -g 322 lavalink && \
-    useradd -r -u 322 -g lavalink lavalink
+WORKDIR /app
 
-WORKDIR /opt/Lavalink
+# Download Lavalink automatically
+ADD https://github.com/lavalink-devs/Lavalink/releases/latest/download/Lavalink.jar Lavalink.jar
 
-RUN chown -R lavalink:lavalink /opt/Lavalink
+# Copy config
+COPY application.yml application.yml
 
-USER lavalink
+EXPOSE 2333
 
-COPY LavalinkServer/build/libs/Lavalink.jar Lavalink.jar
-
-ENTRYPOINT ["java", "-jar", "Lavalink.jar"]
+CMD ["java", "-jar", "Lavalink.jar"]
